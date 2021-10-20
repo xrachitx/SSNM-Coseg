@@ -18,10 +18,10 @@ if __name__ == '__main__':
 
     train_datapath = '../../input/coco-2017-dataset/coco2017/train2017/'
 
-    val_datapath = ['../../input/datasets/iCoseg8',
-                    '../../input/datasets/MSRC7',
-                    '../../input/datasets/Internet_Datasets300',
-                    '../../input/datasets/PASCAL_VOC']
+    val_datapath = ['../input/ssnm-val/datasets/iCoseg8',
+                    '../input/ssnm-val/datasets/MSRC7',
+                    '../input/ssnm-val/datasets/Internet_Datasets300',
+                    '../input/ssnm-val/datasets/PASCAL_VOC']
 
     vgg16_path = './vgg16_bn_feat.pth'
     npy = './new_cat2imgid_dict4000.npy'
@@ -32,7 +32,7 @@ if __name__ == '__main__':
     img_size = 224
     lr = 1e-5
     lr_de = 20000
-    epochs = 100000
+    epochs = 10000
     batch_size = 4
     group_size = 5
     log_interval = 100
