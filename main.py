@@ -16,7 +16,7 @@ if __name__ == '__main__':
     annotation_file = '../../input/coco-2017-dataset/coco2017/annotations/instances_train2017.json'
     coco_item = coco.COCO(annotation_file=annotation_file)
 
-    train_datapath = '../../input/coco-2017-dataset/coco2017/train2017'
+    train_datapath = '../../input/coco-2017-dataset/coco2017/train2017/'
 
     val_datapath = ['../../input/datasets/iCoseg8',
                     '../../input/datasets/MSRC7',
