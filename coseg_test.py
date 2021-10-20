@@ -72,10 +72,10 @@ if __name__ == '__main__':
     device = torch.device(gpu_id)
     model_path = './models/SSNM-Coseg_best.pth'
 
-    val_datapath = ['../input/ssnm-val/datasets/iCoseg8',
-                    '../input/ssnm-val/datasets/MSRC7',
-                    '../input/ssnm-val/datasets/Internet_Datasets300',
-                    '../input/ssnm-val/datasets/PASCAL_VOC']
+    val_datapath = ['../../input/ssnm-val/datasets/iCoseg8',
+                    '../../input/ssnm-val/datasets/MSRC7',
+                    '../../input/ssnm-val/datasets/Internet_Datasets300',
+                    '../../input/ssnm-val/datasets/PASCAL_VOC']
 
     save_root_path = ['./cosegresults/iCoseg8',
                       './cosegresults/Internet_Datasets300',

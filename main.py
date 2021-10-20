@@ -18,10 +18,10 @@ if __name__ == '__main__':
 
     train_datapath = '../../input/coco-2017-dataset/coco2017/train2017/'
 
-    val_datapath = ['../input/ssnm-val/datasets/iCoseg8',
-                    '../input/ssnm-val/datasets/MSRC7',
-                    '../input/ssnm-val/datasets/Internet_Datasets300',
-                    '../input/ssnm-val/datasets/PASCAL_VOC']
+    val_datapath = ['../../input/ssnm-val/datasets/iCoseg8',
+                    '../../input/ssnm-val/datasets/MSRC7',
+                    '../../input/ssnm-val/datasets/Internet_Datasets300',
+                    '../../input/ssnm-val/datasets/PASCAL_VOC']
 
     vgg16_path = './vgg16_bn_feat.pth'
     npy = './new_cat2imgid_dict4000.npy'
