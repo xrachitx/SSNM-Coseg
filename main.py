@@ -13,18 +13,18 @@ torch.backends.cudnn.benchmark = True
 
 if __name__ == '__main__':
     # train_val_config
-    annotation_file = '/home/chenjin/dataset/COCO/COCO2017/annotations/instances_train2017.json'
+    annotation_file = '../input/coco-2017-dataset/coco2017/annotations/instances_train2017.json'
     coco_item = coco.COCO(annotation_file=annotation_file)
 
-    train_datapath = '/home/chenjin/dataset/COCO/COCO2017/train2017/'
+    train_datapath = '../input/coco-2017-dataset/coco2017/train2017'
 
     val_datapath = ['./cosegdatasets/iCoseg8',
                     './cosegdatasets/MSRC7',
                     './cosegdatasets/Internet_Datasets300',
                     './cosegdatasets/PASCAL_VOC']
 
-    vgg16_path = './weights/vgg16_bn_feat.pth'
-    npy = './utils/new_cat2imgid_dict4000.npy'
+    vgg16_path = './vgg16_bn_feat.pth'
+    npy = './new_cat2imgid_dict4000.npy'
 
     # project config
     project_name = 'SSNM-Coseg'
