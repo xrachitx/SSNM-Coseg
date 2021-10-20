@@ -13,15 +13,15 @@ torch.backends.cudnn.benchmark = True
 
 if __name__ == '__main__':
     # train_val_config
-    annotation_file = '../input/coco-2017-dataset/coco2017/annotations/instances_train2017.json'
+    annotation_file = '../../input/coco-2017-dataset/coco2017/annotations/instances_train2017.json'
     coco_item = coco.COCO(annotation_file=annotation_file)
 
-    train_datapath = '../input/coco-2017-dataset/coco2017/train2017'
+    train_datapath = '../../input/coco-2017-dataset/coco2017/train2017'
 
-    val_datapath = ['./cosegdatasets/iCoseg8',
-                    './cosegdatasets/MSRC7',
-                    './cosegdatasets/Internet_Datasets300',
-                    './cosegdatasets/PASCAL_VOC']
+    val_datapath = ['../../input/datasets/iCoseg8',
+                    '../../input/datasets/MSRC7',
+                    '../../input/datasets/Internet_Datasets300',
+                    '../../input/datasets/PASCAL_VOC']
 
     vgg16_path = './vgg16_bn_feat.pth'
     npy = './new_cat2imgid_dict4000.npy'

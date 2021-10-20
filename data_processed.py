@@ -40,7 +40,7 @@ def train_data_producer(coco_item, datapath, npy, q, batch_size=10, group_size=5
     img_transform_gray = transforms.Compose([transforms.Resize((img_size, img_size)), transforms.ToTensor(),
                                         transforms.Normalize(mean=[0.449], std=[0.226])])
     if os.path.exists(npy):
-        list_dict = np.load(npy).item()
+        list_dict = np.load(npy,allow_pickle=True).item()
     else:
         list_dict = filt_small_instance(coco_item, pixthreshold=4000, imgNthreshold=100)
     catid2label={}
