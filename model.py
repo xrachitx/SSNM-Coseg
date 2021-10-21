@@ -94,8 +94,11 @@ def fuse_hsp(x, p):
             nx = tmp.expand_as(t)
         else:
             nx = torch.cat(([nx, tmp.expand_as(t)]), dim=0)
+    print("nx before: ", nx.shape)
     nx = nx.view(x.size(0)*group_size, x.size(1), 1, 1)
+    print("nx final: ", nx.shape)
     y = nx.expand_as(p)
+    print("fuse final: ", y.shape)
     return y
 
 
@@ -152,6 +155,7 @@ class Model(nn.Module):
         x = x.view(x.size(0) // 5, x.size(1), -1, 1)
         print(f"hsp after weird: {x.shape}")
         x = self.sp2(x)
+        # print()
         x = x.view(-1, x.size(1), x.size(2) * x.size(3))
         x = torch.bmm(x, x.transpose(1, 2))
         x = x.view(-1, x.size(1) * x.size(2))
@@ -164,9 +168,13 @@ class Model(nn.Module):
         print(f"cls pred: {cls_pred.shape}")
 
         #semantic and spatial modulator
+        print("g1")
         g1 = fuse_hsp(cls_modulated_vector, newp[0])
+        print("g2")
         g2 = fuse_hsp(cls_modulated_vector, newp[1])
+        print("g3")
         g3 = fuse_hsp(cls_modulated_vector, newp[2])
+        print("g4")
         g4 = fuse_hsp(cls_modulated_vector, newp[3])
 
         spa_1 = F.interpolate(spa_mask, size=[g1.size(2), g1.size(3)], mode='bilinear')
