@@ -135,6 +135,7 @@ class Model(nn.Module):
 
 
         # print newp feature shapes
+        print("newp length: ",len(newp))
         [f"newp[{k}] shape: {newp[k].shape}"for k in range(len(newp))]
 
         # spatial modulator
