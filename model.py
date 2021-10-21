@@ -133,8 +133,13 @@ class Model(nn.Module):
             np = self.incr_channel2[k](np)
             newp.append(self.incr_channel2[4](np))
 
+
+        # print newp feature shapes
+        [f"newp[{k}] shape: {newp[k].shape}"for k in range(len(newp))]
+
         # spatial modulator
         spa_mask = spatial_optimize(newp[3], self.group_size).to(self.device)
+        print(spa_mask.shape)
 
         # hsp
         x = newp[3]
@@ -142,15 +147,20 @@ class Model(nn.Module):
         x = x.view(-1, x.size(1), x.size(2) * x.size(3))
         x = torch.bmm(x, x.transpose(1, 2))
         x = x.view(-1, x.size(1) * x.size(2))
+        print(f"hsp before weird: {x.shape}")
         x = x.view(x.size(0) // 5, x.size(1), -1, 1)
+        print(f"hsp after weird: {x.shape}")
         x = self.sp2(x)
         x = x.view(-1, x.size(1), x.size(2) * x.size(3))
         x = torch.bmm(x, x.transpose(1, 2))
         x = x.view(-1, x.size(1) * x.size(2))
+        print(f"hsp final: {x.shape}")
 
         #cls pred
         cls_modulated_vector = self.cls_m(x)
+        print(f"cls modulated: {cls_modulated_vector.shape}")
         cls_pred = self.cls(cls_modulated_vector)
+        print(f"cls pred: {cls_pred.shape}")
 
         #semantic and spatial modulator
         g1 = fuse_hsp(cls_modulated_vector, newp[0])

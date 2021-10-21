@@ -16,6 +16,7 @@ def train(net, device, q, log_txt_file, val_datapath, models_train_best, models_
         net.zero_grad()
         img, cls_gt, mask_gt = img.to(device), cls_gt.to(device), mask_gt.to(device)
         pred_cls, pred_mask = net(img)
+        exit()
         all_loss, m_loss, c_loss, s_loss = loss(pred_mask, mask_gt, pred_cls, cls_gt)
         all_loss.backward()
         epoch_loss = all_loss.item()
