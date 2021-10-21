@@ -13,6 +13,7 @@ def train(net, device, q, log_txt_file, val_datapath, models_train_best, models_
     ave_loss, ave_m_loss, ave_c_loss, ave_s_loss = 0, 0, 0, 0
     for epoch in range(1, epochs+1):
         img, cls_gt, mask_gt = q.get()
+        print(img.shape)
         net.zero_grad()
         img, cls_gt, mask_gt = img.to(device), cls_gt.to(device), mask_gt.to(device)
         pred_cls, pred_mask = net(img)
