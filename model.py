@@ -177,7 +177,7 @@ class Model(nn.Module):
         print("g4")
         g4 = fuse_hsp(cls_modulated_vector, newp[3])
 
-        print("spa shape",spa.shape)
+        print("spa shape",spa_mask.shape)
         spa_1 = F.interpolate(spa_mask, size=[g1.size(2), g1.size(3)], mode='bilinear')
         print("spa1.shape: ",spa_1.shape)
         spa_1 = spa_1.expand_as(g1)
