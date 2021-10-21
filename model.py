@@ -136,7 +136,7 @@ class Model(nn.Module):
 
         # print newp feature shapes
         print("newp length: ",len(newp))
-        [f"newp[{k}] shape: {newp[k].shape}"for k in range(len(newp))]
+        [print(f"newp[{k}] shape: {newp[k].shape}") for k in range(len(newp))]
 
         # spatial modulator
         spa_mask = spatial_optimize(newp[3], self.group_size).to(self.device)
