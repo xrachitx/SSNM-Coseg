@@ -32,7 +32,7 @@ if __name__ == '__main__':
     img_size = 224
     lr = 1e-5
     lr_de = 20000
-    epochs = 100000
+    epochs = 10000
     batch_size = 4
     group_size = 5
     log_interval = 100

@@ -94,8 +94,11 @@ def fuse_hsp(x, p):
             nx = tmp.expand_as(t)
         else:
             nx = torch.cat(([nx, tmp.expand_as(t)]), dim=0)
+    print("nx before: ", nx.shape)
     nx = nx.view(x.size(0)*group_size, x.size(1), 1, 1)
+    print("nx final: ", nx.shape)
     y = nx.expand_as(p)
+    print("fuse final: ", y.shape)
     return y
 
 
@@ -133,8 +136,14 @@ class Model(nn.Module):
             np = self.incr_channel2[k](np)
             newp.append(self.incr_channel2[4](np))
 
+
+        # print newp feature shapes
+        print("newp length: ",len(newp))
+        [print(f"newp[{k}] shape: {newp[k].shape}") for k in range(len(newp))]
+
         # spatial modulator
         spa_mask = spatial_optimize(newp[3], self.group_size).to(self.device)
+        print(spa_mask.shape)
 
         # hsp
         x = newp[3]
@@ -142,26 +151,41 @@ class Model(nn.Module):
         x = x.view(-1, x.size(1), x.size(2) * x.size(3))
         x = torch.bmm(x, x.transpose(1, 2))
         x = x.view(-1, x.size(1) * x.size(2))
+        print(f"hsp before weird: {x.shape}")
         x = x.view(x.size(0) // 5, x.size(1), -1, 1)
+        print(f"hsp after weird: {x.shape}")
         x = self.sp2(x)
+        # print()
         x = x.view(-1, x.size(1), x.size(2) * x.size(3))
         x = torch.bmm(x, x.transpose(1, 2))
         x = x.view(-1, x.size(1) * x.size(2))
+        print(f"hsp final: {x.shape}")
 
         #cls pred
         cls_modulated_vector = self.cls_m(x)
+        print(f"cls modulated: {cls_modulated_vector.shape}")
         cls_pred = self.cls(cls_modulated_vector)
+        print(f"cls pred: {cls_pred.shape}")
 
         #semantic and spatial modulator
+        print("g1")
         g1 = fuse_hsp(cls_modulated_vector, newp[0])
+        print("g2")
         g2 = fuse_hsp(cls_modulated_vector, newp[1])
+        print("g3")
         g3 = fuse_hsp(cls_modulated_vector, newp[2])
+        print("g4")
         g4 = fuse_hsp(cls_modulated_vector, newp[3])
 
+        print("spa shape",spa_mask.shape)
         spa_1 = F.interpolate(spa_mask, size=[g1.size(2), g1.size(3)], mode='bilinear')
+        print("spa1.shape: ",spa_1.shape)
         spa_1 = spa_1.expand_as(g1)
+        print("spa1.shape final: ",spa_1.shape)
         spa_2 = F.interpolate(spa_mask, size=[g2.size(2), g2.size(3)], mode='bilinear')
+        print("spa2.shape: ",spa_2.shape)
         spa_2 = spa_2.expand_as(g2)
+        print("spa2.shape final: ",spa_2.shape)
         spa_3 = F.interpolate(spa_mask, size=[g3.size(2), g3.size(3)], mode='bilinear')
         spa_3 = spa_3.expand_as(g3)
         spa_4 = F.interpolate(spa_mask, size=[g4.size(2), g4.size(3)], mode='bilinear')
