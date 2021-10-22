@@ -13,18 +13,18 @@ torch.backends.cudnn.benchmark = True
 
 if __name__ == '__main__':
     # train_val_config
-    annotation_file = '../../input/coco-2017-dataset/coco2017/annotations/instances_train2017.json'
+    annotation_file = '/home/chenjin/dataset/COCO/COCO2017/annotations/instances_train2017.json'
     coco_item = coco.COCO(annotation_file=annotation_file)
 
-    train_datapath = '../../input/coco-2017-dataset/coco2017/train2017/'
+    train_datapath = '/home/chenjin/dataset/COCO/COCO2017/train2017/'
 
-    val_datapath = ['../../input/ssnm-val/datasets/iCoseg8',
-                    '../../input/ssnm-val/datasets/MSRC7',
-                    '../../input/ssnm-val/datasets/Internet_Datasets300',
-                    '../../input/ssnm-val/datasets/PASCAL_VOC']
+    val_datapath = ['./cosegdatasets/iCoseg8',
+                    './cosegdatasets/MSRC7',
+                    './cosegdatasets/Internet_Datasets300',
+                    './cosegdatasets/PASCAL_VOC']
 
-    vgg16_path = './vgg16_bn_feat.pth'
-    npy = './new_cat2imgid_dict4000.npy'
+    vgg16_path = './weights/vgg16_bn_feat.pth'
+    npy = './utils/new_cat2imgid_dict4000.npy'
 
     # project config
     project_name = 'SSNM-Coseg'
@@ -32,7 +32,7 @@ if __name__ == '__main__':
     img_size = 224
     lr = 1e-5
     lr_de = 20000
-    epochs = 10000
+    epochs = 100000
     batch_size = 4
     group_size = 5
     log_interval = 100
@@ -72,7 +72,7 @@ if __name__ == '__main__':
     p2.start()
     p3.start()
     time.sleep(2)
-
+    exit(0)
     train(net, device, q, log_txt_file, val_datapath, models_train_best, models_train_last, lr, lr_de, epochs, log_interval, val_interval)
 
 

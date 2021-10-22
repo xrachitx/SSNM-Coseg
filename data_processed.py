@@ -40,7 +40,7 @@ def train_data_producer(coco_item, datapath, npy, q, batch_size=10, group_size=5
     img_transform_gray = transforms.Compose([transforms.Resize((img_size, img_size)), transforms.ToTensor(),
                                         transforms.Normalize(mean=[0.449], std=[0.226])])
     if os.path.exists(npy):
-        list_dict = np.load(npy,allow_pickle=True).item()
+        list_dict = np.load(npy).item()
     else:
         list_dict = filt_small_instance(coco_item, pixthreshold=4000, imgNthreshold=100)
     catid2label={}
@@ -105,4 +105,11 @@ def train_data_producer(coco_item, datapath, npy, q, batch_size=10, group_size=5
             group_n = group_n + 1
         idx = mask_labels[:, :, :] > 1
         mask_labels[idx] = 1
+        print(cls_labels)
+        print("\n End 1")
+        print(torch.unique(cls_labels, return_counts=True))
+        print("\n End 2")
+        print("rgb ",rgb.shape)
+        print("cls_labels ",cls_labels.shape)
+        print("mask_labels ",mask_labels.shape)
         q.put([rgb, cls_labels, mask_labels])
