@@ -7,6 +7,10 @@ from val import validation
 
 def train(net, device, q, log_txt_file, val_datapath, models_train_best, models_train_last, lr=1e-4, lr_de_epoch=25000,
           epochs=100000, log_interval=100, val_interval=1000):
+    while True:
+        a,_1,_2 = q.get()
+        print(a.shape)
+    exit(0)
     optimizer = Adam(net.parameters(), lr, weight_decay=1e-6)
     loss = Loss().to(device)
     best_p, best_j = 0, 1
