@@ -33,7 +33,7 @@ def filt_small_instance(coco_item, pixthreshold=4000,imgNthreshold=5):
     np.save('./utils/new_cat2imgid_dict%d.npy'%pixthreshold, new_dict)
     return new_dict
 
-def co_skel_data_producer():
+# def co_skel_data_producer():
 
 
 def train_data_producer(coco_item, datapath, npy, q, batch_size=10, group_size=5, img_size=224):
