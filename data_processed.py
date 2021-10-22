@@ -62,10 +62,10 @@ def train_data_producer(coco_item, datapath, npy, q, batch_size=10, group_size=5
             batch_catid = random.sample(list_dict.keys(), batch_size)
         group_n = 0
         img_n = 0
-        print("batch: ",batch_catid)
+        # print("batch: ",batch_catid)
         for catid in batch_catid:
             imgids = random.sample(list_dict[catid], group_size)
-            print("Sel Images: ",imgids)
+            # print("Sel Images: ",imgids)
             co_catids = []
             anns = coco_item.imgToAnns[imgids[0]]
             for ann in anns:
@@ -110,11 +110,12 @@ def train_data_producer(coco_item, datapath, npy, q, batch_size=10, group_size=5
             group_n = group_n + 1
         idx = mask_labels[:, :, :] > 1
         mask_labels[idx] = 1
-        print(cls_labels)
-        print("\n End 1")
-        print(torch.unique(cls_labels, return_counts=True))
-        print("\n End 2")
-        print("rgb ",rgb.shape)
-        print("cls_labels ",cls_labels.shape)
-        print("mask_labels ",mask_labels.shape)
+        # print(cls_labels)
+        # print("\n End 1")
+        # print(torch.unique(cls_labels, return_counts=True))
+        # print("\n End 2")
+        # print("rgb ",rgb.shape)
+        # print("cls_labels ",cls_labels.shape)
+        # print("mask_labels ",mask_labels.shape)
+        print("Q size: ",q.qsize())
         q.put([rgb, cls_labels, mask_labels])
