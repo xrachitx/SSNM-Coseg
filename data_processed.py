@@ -65,6 +65,7 @@ def train_data_producer(coco_item, datapath, npy, q, batch_size=10, group_size=5
         print("batch: ",batch_catid)
         for catid in batch_catid:
             imgids = random.sample(list_dict[catid], group_size)
+            print("Sel Images: ",imgids)
             co_catids = []
             anns = coco_item.imgToAnns[imgids[0]]
             for ann in anns:

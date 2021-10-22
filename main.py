@@ -72,6 +72,8 @@ if __name__ == '__main__':
     p2.start()
     p3.start()
     time.sleep(2)
+
+    print("Q size: ",q.qsize())
     exit(0)
     train(net, device, q, log_txt_file, val_datapath, models_train_best, models_train_last, lr, lr_de, epochs, log_interval, val_interval)
 
