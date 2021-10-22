@@ -33,6 +33,9 @@ def filt_small_instance(coco_item, pixthreshold=4000,imgNthreshold=5):
     np.save('./utils/new_cat2imgid_dict%d.npy'%pixthreshold, new_dict)
     return new_dict
 
+def co_skel_data_producer():
+
+
 def train_data_producer(coco_item, datapath, npy, q, batch_size=10, group_size=5, img_size=224):
     img_transform = transforms.Compose([transforms.Resize((img_size, img_size)), transforms.ToTensor(),
                                         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
@@ -59,6 +62,7 @@ def train_data_producer(coco_item, datapath, npy, q, batch_size=10, group_size=5
             batch_catid = random.sample(list_dict.keys(), batch_size)
         group_n = 0
         img_n = 0
+        print("batch: ",batch_catid)
         for catid in batch_catid:
             imgids = random.sample(list_dict[catid], group_size)
             co_catids = []
