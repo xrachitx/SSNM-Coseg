@@ -71,7 +71,7 @@ if __name__ == '__main__':
     p1.start()
     p2.start()
     p3.start()
-    time.sleep(10)
+    time.sleep(30)
 
     
     # exit(0)
