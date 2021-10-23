@@ -12,7 +12,7 @@ def train(net, device, q, log_txt_file, val_datapath, models_train_best, models_
         # print(i)
         a,_1,_2 = i
         sumx +=a.shape[0]
-        print(a.shape)
+        # print(a.shape)
     print(sumx)
     exit(0)
     optimizer = Adam(net.parameters(), lr, weight_decay=1e-6)
