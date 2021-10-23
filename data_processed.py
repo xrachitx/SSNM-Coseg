@@ -117,5 +117,5 @@ def train_data_producer(coco_item, datapath, npy, q, batch_size=10, group_size=5
         # print("rgb ",rgb.shape)
         # print("cls_labels ",cls_labels.shape)
         # print("mask_labels ",mask_labels.shape)
-        print("Q size: ",q.qsize())
+        # print("Q size: ",q.qsize())
         q.put([rgb, cls_labels, mask_labels])
