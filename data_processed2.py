@@ -125,7 +125,7 @@ def co_skel_data_producer(csv_file,batch_size=10, group_size=5, img_size=224,gt=
                     mask = Image.open(mask_path)
 
                     mask = ImageOps.grayscale(mask)
-                    mask[mask > 0] = 255
+                    # mask[mask > 0] = 255
                     mask = gt_transform(mask)
                     mask[mask > 0.5] = 1
                     mask[mask <= 0.5] = 0
