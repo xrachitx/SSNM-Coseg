@@ -29,7 +29,7 @@ for i in sel_cat:
         img_path = f"../../input/dataset/Dataset/images/{sel_cat[i]}/{img}"
         seg_path = f"../../input/dataset/Dataset/seg_mask/{sel_cat[i]}/{img}"
         compl_mask_path = f"../../input/dataset/Dataset/complete_mask/{sel_cat[i]}/{img}"
-        gt_path = f"../../input/dataset/sDataset/gt/{sel_cat[i]}/{img}"
+        gt_path = f"../../input/dataset/Dataset/gt/{sel_cat[i]}/{img}"
         entry = [img_path, seg_path, compl_mask_path ,gt_path,sel_cat[i]]
         fin_arr.append(entry)
     
