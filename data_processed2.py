@@ -107,7 +107,7 @@ def co_skel_data_producer(csv_file,batch_size=10, group_size=5, img_size=224,gt=
         if not cat2imgpath:
             break
         else:
-            sel_cats = random.sample(cat2imgpath.keys(), batch_size)
+            sel_cats = random.sample(cat2imgpath.keys(), min(len(cat2imgpath.keys()), batch_size))
             print("sel order: ", sel_cats)
 
             img_n = 0
