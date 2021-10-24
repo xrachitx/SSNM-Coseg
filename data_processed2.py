@@ -231,5 +231,5 @@ def co_skel_data_producer(csv_file,batch_size=10, group_size=5, img_size=224,gt=
 #         # print("mask_labels ",mask_labels.shape)
 #         print("Q size: ",q.qsize())
 #         q.put([rgb, cls_labels, mask_labels])
-
-
+if __name__ == "__main__":
+    q = co_skel_data_producer("./final.csv")
