@@ -114,6 +114,7 @@ def co_skel_data_producer(csv_file,batch_size=10, group_size=5, img_size=224,gt=
             group_n = 0
             for cat in sel_cats:
                 for i in range(group_size):
+                    print("curr status: ", cat2imgpath.keys())
                     img_path = cat2imgpath[cat][0][0]
 
                     img = Image.open(img_path)
@@ -132,7 +133,6 @@ def co_skel_data_producer(csv_file,batch_size=10, group_size=5, img_size=224,gt=
                     mask[mask <= 0.5] = 0
 
                     # print(img_n)
-                    print("curr status: ", cat2imgpath.keys())
                     rgb[img_n,:,:,:] = copy.deepcopy(img)
                     mask_labels[img_n,:,:] = copy.deepcopy(mask)
 
