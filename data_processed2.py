@@ -108,6 +108,7 @@ def co_skel_data_producer(csv_file,batch_size=10, group_size=5, img_size=224,gt=
             break
         else:
             sel_cats = random.sample(cat2imgpath.keys(), batch_size)
+            print("sel order: ", sel_cats)
 
             img_n = 0
             group_n = 0
@@ -130,7 +131,8 @@ def co_skel_data_producer(csv_file,batch_size=10, group_size=5, img_size=224,gt=
                     mask[mask > 0.5] = 1
                     mask[mask <= 0.5] = 0
 
-                    print(img_n)
+                    # print(img_n)
+                    print("curr status: ", cat2imgpath.keys())
                     rgb[img_n,:,:,:] = copy.deepcopy(img)
                     mask_labels[img_n,:,:] = copy.deepcopy(mask)
 
@@ -234,3 +236,4 @@ def co_skel_data_producer(csv_file,batch_size=10, group_size=5, img_size=224,gt=
 #         q.put([rgb, cls_labels, mask_labels])
 if __name__ == "__main__":
     q = co_skel_data_producer("./final.csv")
+    print(q.get())
