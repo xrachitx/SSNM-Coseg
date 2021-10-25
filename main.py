@@ -5,7 +5,7 @@ import queue
 import threading
 from model import build_model, weights_init
 from tools import custom_print
-from data_processed2 import train_data_producer, co_skel_data_producer
+from data_processed2 import co_skel_data_producer
 from train import train
 import time
 torch.backends.cudnn.benchmark = True
