@@ -232,7 +232,7 @@ def build_model(device):
                  hsp(512, 64),
                  hsp(64**2, 32),
                  cls_modulation_branch(32**2, 512),
-                 cls_branch(512, 78),
+                 cls_branch(512, 13),
                  concat_r(),
                  concat_1(),
                  mask_branch())
