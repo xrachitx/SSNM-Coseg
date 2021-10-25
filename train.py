@@ -31,7 +31,7 @@ def train(net, device, q, log_txt_file, val_datapath, models_train_best, models_
         ave_c_loss += c_l
         ave_s_loss += s_l
         optimizer.step()
-
+        print(f"Epochs: {epoch}")
         if epoch % log_interval == 0:
             ave_loss = ave_loss / log_interval
             ave_m_loss = ave_m_loss / log_interval
