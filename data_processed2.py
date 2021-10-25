@@ -116,7 +116,7 @@ def co_skel_data_producer(csv_file,batch_size=10, group_size=5, img_size=224,gt=
             group_n = 0
             imgs = []
             for cat in sel_cats:
-                imgs.append([])
+                # imgs.append([])
                 for i in range(group_size):
                     # print("curr status: ", cat2imgpath.keys())
                     img_path = cat2imgpath[cat][0][0]
@@ -152,7 +152,7 @@ def co_skel_data_producer(csv_file,batch_size=10, group_size=5, img_size=224,gt=
                         break
 
                     img_n += 1
-                    imgs[-1].append(img_path)
+                    imgs.append(img_path)
                 cls_labels[group_n, cat2index[cat]-1] = 1
                 group_n += 1
 
