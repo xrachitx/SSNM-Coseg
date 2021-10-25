@@ -12,6 +12,7 @@ def train(net, device, q, log_txt_file, val_datapath, models_train_best, models_
     loss = Loss().to(device)
     best_p, best_j = 0, 1
     ave_loss, ave_m_loss, ave_c_loss, ave_s_loss = 0, 0, 0, 0
+    print("Starting training")
     for epoch in range(1, epochs+1):
         img, cls_gt, mask_gt = q.get()
         # print(img.shape)
