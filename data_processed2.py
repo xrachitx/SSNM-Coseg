@@ -102,7 +102,7 @@ def co_skel_data_producer(csv_file,batch_size=10, group_size=5, img_size=224,gt=
 
     for cat in cat2imgpath:
         random.shuffle(cat2imgpath[cat])
-
+    imgs = []
     while True:
         if not cat2imgpath:
             break
@@ -114,7 +114,7 @@ def co_skel_data_producer(csv_file,batch_size=10, group_size=5, img_size=224,gt=
                 # print(s," ", len(cat2imgpath[s]))
             img_n = 0
             group_n = 0
-            imgs = []
+
             for cat in sel_cats:
                 imgs.append([])
                 for i in range(group_size):
