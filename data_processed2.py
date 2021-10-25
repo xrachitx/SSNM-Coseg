@@ -153,6 +153,7 @@ def co_skel_data_producer(csv_file,batch_size=10, group_size=5, img_size=224,gt=
 
                     img_n += 1
                     imgs.append(img_path)
+                print(cat,cat2index[cat]-1)
                 cls_labels[group_n, cat2index[cat]-1] = 1
                 group_n += 1
 
