@@ -70,3 +70,4 @@ def train(net, device, q, log_txt_file, val_datapath, models_train_best, models_
         if epoch % lr_de_epoch == 0:
             optimizer = Adam(net.parameters(), lr/2, weight_decay=1e-6)
             lr = lr / 2
+        del img, cls_gt, mask_gt
