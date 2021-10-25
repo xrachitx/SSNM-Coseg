@@ -18,6 +18,7 @@ def train(net, device, q, log_txt_file, val_datapath, models_train_best, models_
         img, cls_gt, mask_gt = q.get()
         # print(img.shape)
         net.zero_grad()
+        print("pushing to device")
         img, cls_gt, mask_gt = img.to(device), cls_gt.to(device), mask_gt.to(device)
         print("Forward")
         pred_cls, pred_mask = net(img)
