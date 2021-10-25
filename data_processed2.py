@@ -91,9 +91,6 @@ def co_skel_data_producer(csv_file,batch_size=10, group_size=5, img_size=224,gt=
         else:
             pass
     
-    rgb = torch.zeros(batch_size*group_size, 3, img_size, img_size)
-    cls_labels = torch.zeros(batch_size, cls_size)
-    mask_labels = torch.zeros(batch_size*group_size, img_size, img_size)
 
     q = queue.Queue(maxsize=143)
 
@@ -107,6 +104,10 @@ def co_skel_data_producer(csv_file,batch_size=10, group_size=5, img_size=224,gt=
         if not cat2imgpath:
             break
         else:
+            rgb = torch.zeros(batch_size*group_size, 3, img_size, img_size)
+            cls_labels = torch.zeros(batch_size, cls_size)
+            mask_labels = torch.zeros(batch_size*group_size, img_size, img_size)
+
             sel_cats = random.sample(cat2imgpath.keys(), min(len(cat2imgpath.keys()), batch_size))
             # print("sel order: ", sel_cats, len(sel_cats))
             # for s in sel_cats:
