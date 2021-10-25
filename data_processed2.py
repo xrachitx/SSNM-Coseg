@@ -108,7 +108,7 @@ def co_skel_data_producer(csv_file,batch_size=10, group_size=5, img_size=224,gt=
             break
         else:
             sel_cats = random.sample(cat2imgpath.keys(), min(len(cat2imgpath.keys()), batch_size))
-            print("sel order: ", sel_cats, len(sel_cats))
+            # print("sel order: ", sel_cats, len(sel_cats))
             # for s in sel_cats:
                 # print("hi")
                 # print(s," ", len(cat2imgpath[s]))
@@ -118,7 +118,7 @@ def co_skel_data_producer(csv_file,batch_size=10, group_size=5, img_size=224,gt=
             for cat in sel_cats:
                 imgs.append([])
                 for i in range(group_size):
-                    print("curr status: ", cat2imgpath.keys())
+                    # print("curr status: ", cat2imgpath.keys())
                     img_path = cat2imgpath[cat][0][0]
 
                     img = Image.open(img_path)
