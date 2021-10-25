@@ -35,7 +35,7 @@ def filt_small_instance(coco_item, pixthreshold=4000,imgNthreshold=5):
     np.save('./utils/new_cat2imgid_dict%d.npy'%pixthreshold, new_dict)
     return new_dict
 
-def co_skel_data_producer(csv_file,batch_size=10, group_size=5, img_size=224,gt=0, max_images=20, cls_size=13):
+def co_skel_data_producer(csv_file,batch_size=10, group_size=5, max_images=20, img_size=224,gt=0, cls_size=13):
     img_transform = transforms.Compose([transforms.Resize((img_size, img_size)), transforms.ToTensor(),
                                         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
     gt_transform = transforms.Compose([transforms.Resize((img_size, img_size)), transforms.ToTensor()])

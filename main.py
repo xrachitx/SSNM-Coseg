@@ -73,7 +73,7 @@ if __name__ == '__main__':
     # p3.start()
     # time.sleep(30)
 
-    q = co_skel_data_producer("./final.csv",5,5)
+    q = co_skel_data_producer("./final.csv",batch_size,group_size)
     train(net, device, q, log_txt_file, val_datapath, models_train_best, models_train_last, lr, lr_de, epochs, log_interval, val_interval)
 
 
