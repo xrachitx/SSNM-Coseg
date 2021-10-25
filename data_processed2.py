@@ -81,7 +81,7 @@ def co_skel_data_producer(csv_file,batch_size=10, group_size=5, img_size=224,gt=
     random.shuffle(csv_rows)
 
     for row in csv_rows:
-        if len(cat2imgpath[row[-1]]) <= max_images:
+        if len(cat2imgpath[row[-1]]) < max_images:
             if gt == 0:
                 cat2imgpath[row[-1]].append([row[0], row[3]])
             elif gt == 1:#Complete Seg Mask
