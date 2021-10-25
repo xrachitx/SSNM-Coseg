@@ -7,25 +7,18 @@ from val import validation
 
 def train(net, device, q, log_txt_file, val_datapath, models_train_best, models_train_last, lr=1e-4, lr_de_epoch=25000,
           epochs=100000, log_interval=100, val_interval=1000):
-    sumx = 0
-    for i in q.queue:
-        # print(i)
-        a,_1,_2 = i
-        sumx +=a.shape[0]
-        print(a.shape,_1.shape,_2.shape,_1)
-    print(sumx)
-    exit(0)
+
     optimizer = Adam(net.parameters(), lr, weight_decay=1e-6)
     loss = Loss().to(device)
     best_p, best_j = 0, 1
     ave_loss, ave_m_loss, ave_c_loss, ave_s_loss = 0, 0, 0, 0
     for epoch in range(1, epochs+1):
         img, cls_gt, mask_gt = q.get()
-        print(img.shape)
+        # print(img.shape)
         net.zero_grad()
         img, cls_gt, mask_gt = img.to(device), cls_gt.to(device), mask_gt.to(device)
         pred_cls, pred_mask = net(img)
-        exit()
+        # exit()
         all_loss, m_loss, c_loss, s_loss = loss(pred_mask, mask_gt, pred_cls, cls_gt)
         all_loss.backward()
         epoch_loss = all_loss.item()
