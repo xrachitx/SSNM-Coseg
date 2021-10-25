@@ -15,6 +15,7 @@ def train(net, device, q, log_txt_file, val_datapath, models_train_best, models_
     print("Starting training")
     for epoch in range(1, epochs+1):
         print(f"Starting Epoch: {epoch}")
+        print(f"q size: {q.qsize()}")
         img, cls_gt, mask_gt = q.get()
         # print(img.shape)
         net.zero_grad()
