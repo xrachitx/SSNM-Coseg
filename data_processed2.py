@@ -136,6 +136,8 @@ def co_skel_data_producer(csv_file,batch_size=10, group_size=5, img_size=224,gt=
 
                     # print(img_n)
                     # print(img_path)
+                    if img.shape[0]!=3:
+                        print(img_path, " ",img.shape)
                     rgb[img_n,:,:,:] = copy.deepcopy(img)
                     mask_labels[img_n,:,:] = copy.deepcopy(mask)
 
