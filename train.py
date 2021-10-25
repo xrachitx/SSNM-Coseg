@@ -14,6 +14,7 @@ def train(net, device, q, log_txt_file, val_datapath, models_train_best, models_
     ave_loss, ave_m_loss, ave_c_loss, ave_s_loss = 0, 0, 0, 0
     print("Starting training")
     for epoch in range(1, epochs+1):
+        print(f"Starting Epoch: {epoch}")
         img, cls_gt, mask_gt = q.get()
         # print(img.shape)
         net.zero_grad()
@@ -31,7 +32,7 @@ def train(net, device, q, log_txt_file, val_datapath, models_train_best, models_
         ave_c_loss += c_l
         ave_s_loss += s_l
         optimizer.step()
-        print(f"Epochs: {epoch}")
+        print(f"Ending Epoch: {epoch}")
         if epoch % log_interval == 0:
             ave_loss = ave_loss / log_interval
             ave_m_loss = ave_m_loss / log_interval
