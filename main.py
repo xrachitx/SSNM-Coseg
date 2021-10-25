@@ -33,7 +33,7 @@ if __name__ == '__main__':
     lr = 1e-5
     lr_de = 20000
     epochs = 10000
-    batch_size = 5
+    batch_size = 2
     group_size = 5
     log_interval = 100
     val_interval = 1000
