@@ -38,6 +38,9 @@ if __name__ == '__main__':
     group_size = 5
     log_interval = 100
     val_interval = 1000
+    max_images=50
+    gt = 0
+    csv_file = "./final.csv"
 
     # create log dir
     log_root = './logs'
@@ -61,7 +64,7 @@ if __name__ == '__main__':
     net.apply(weights_init)
     net.base.load_state_dict(torch.load(vgg16_path))
 
-    csv_file = "./final.csv"
+    
 
     cat2imgpath = {  
        "Aeroplane":[],
