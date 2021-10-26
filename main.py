@@ -39,7 +39,7 @@ if __name__ == '__main__':
     log_interval = 100
     val_interval = 1000
     max_images=50
-    gt = 0
+    gt = 2
     csv_file = "./final.csv"
 
     # create log dir

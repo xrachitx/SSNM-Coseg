@@ -58,8 +58,8 @@ def co_skel_data_producer(cat2imgpath,q,batch_size=5, group_size=5, max_images=5
        "Zebra":13
     }
     
-    while q.qsize()<40:
-        print(q.qsize())
+    while True:
+        # print(q.qsize())
         rgb = torch.zeros(batch_size*group_size, 3, img_size, img_size)
         cls_labels = torch.zeros(batch_size, cls_size)
         mask_labels = torch.zeros(batch_size*group_size, img_size, img_size)
@@ -96,8 +96,8 @@ def co_skel_data_producer(cat2imgpath,q,batch_size=5, group_size=5, max_images=5
             group_n += 1
 
         q.put([rgb, cls_labels, mask_labels])
-    print("yay")
+    # print("yay")
 if __name__ == "__main__":
     q = co_skel_data_producer("./final.csv")
     print(q.get())
-    print("yay")
+    # print("yay")
