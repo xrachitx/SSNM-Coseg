@@ -81,7 +81,7 @@ def co_skel_data_producer(cat2imgpath,q,batch_size=5, group_size=5, max_images=5
 
                 mask_path = cat2imgpath[cat][i][1]
                 # mask = Image.open(mask_path)
-                mask = cv2.imread(mask_path)
+                mask = cv2.imread(mask_path,cv2.IMREAD_GRAYSCALE)
                 mask = mask*255
                 # mask = ImageOps.grayscale(mask)
                 mask[mask > 0] = 255
