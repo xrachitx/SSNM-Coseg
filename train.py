@@ -14,19 +14,11 @@ def train(net, device, q, log_txt_file, val_datapath, models_train_best, models_
     ave_loss, ave_m_loss, ave_c_loss, ave_s_loss = 0, 0, 0, 0
     print("Starting training")
     for epoch in range(1, epochs+1):
-        print(f"Starting Epoch: {epoch}")
-        print(f"q size: {q.qsize()}")
         img, cls_gt, mask_gt = q.get()
-        # print(img.shape)
         net.zero_grad()
-        print("pushing to device")
         img, cls_gt, mask_gt = img.to(device), cls_gt.to(device), mask_gt.to(device)
-        print("Forward")
         pred_cls, pred_mask = net(img)
-        # exit()
-        print("Loss Computation")
         all_loss, m_loss, c_loss, s_loss = loss(pred_mask, mask_gt, pred_cls, cls_gt)
-        print("Backward")
         all_loss.backward()
         epoch_loss = all_loss.item()
         m_l = m_loss.item()
@@ -37,7 +29,6 @@ def train(net, device, q, log_txt_file, val_datapath, models_train_best, models_
         ave_c_loss += c_l
         ave_s_loss += s_l
         optimizer.step()
-        print(f"Ending Epoch: {epoch}")
         if epoch % log_interval == 0:
             ave_loss = ave_loss / log_interval
             ave_m_loss = ave_m_loss / log_interval

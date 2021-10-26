@@ -57,35 +57,18 @@ def co_skel_data_producer(cat2imgpath,q,batch_size=5, group_size=5, max_images=5
        "Zebra":13
     }
     
-
-    # q = queue.Queue(maxsize=60)
-
-
-    # imgs = []
     while True:
-        # print(q.qsize())
-        # if not cat2imgpath:
-            # break
-        # else:
         rgb = torch.zeros(batch_size*group_size, 3, img_size, img_size)
         cls_labels = torch.zeros(batch_size, cls_size)
         mask_labels = torch.zeros(batch_size*group_size, img_size, img_size)
 
         sel_cats = random.sample(cat2imgpath.keys(), min(len(cat2imgpath.keys()), batch_size))
-        # for cat in cat2imgpath:
-            
-        # print("sel order: ", sel_cats, len(sel_cats))
-        # for s in sel_cats:
-            # print("hi")
-            # print(s," ", len(cat2imgpath[s]))
+
         img_n = 0
         group_n = 0
-        # imgs = []
         for cat in sel_cats:
             random.shuffle(cat2imgpath[cat])
-            # imgs.append([])
             for i in range(group_size):
-                # print("curr status: ", cat2imgpath.keys())
                 img_path = cat2imgpath[cat][i][0]
 
                 img = Image.open(img_path)
@@ -102,31 +85,15 @@ def co_skel_data_producer(cat2imgpath,q,batch_size=5, group_size=5, max_images=5
                 mask = gt_transform(mask)
                 mask[mask > 0.5] = 1
                 mask[mask <= 0.5] = 0
-
-                # print(img_n)
-                # print(img_path)
-                # if img.shape[0]!=3:
-                # print(img_path, cat)
                 rgb[img_n,:,:,:] = copy.deepcopy(img)
                 mask_labels[img_n,:,:] = copy.deepcopy(mask)
-
-                # delete image
-
-                # cat2imgpath[cat].remove(cat2imgpath[cat][0])
-
-                # if len(cat2imgpath[cat]) == 0:
-                #     del cat2imgpath[cat]
-                #     break
-
                 img_n += 1
-                # imgs.append(img_path)
-            # print(cat,cat2index[cat]-1)
+
             cls_labels[group_n, cat2index[cat]-1] = 1
             group_n += 1
 
         q.put([rgb, cls_labels, mask_labels])
-    # return q
-
+    
 if __name__ == "__main__":
     q = co_skel_data_producer("./final.csv")
     print(q.get())
