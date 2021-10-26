@@ -15,6 +15,7 @@ def test(gpu_id, model_path, datapath, save_root_path, group_size, img_size, img
                                              transforms.Normalize(mean=[0.449], std=[0.226])])
     with torch.no_grad():
         for p in range(len(datapath)):
+            print(datapath[p])
             all_class = os.listdir(os.path.join(datapath[p], img_dir_name))
             image_list, save_list = list(), list()
             for s in range(len(all_class)):
@@ -72,14 +73,6 @@ if __name__ == '__main__':
     device = torch.device(gpu_id)
     model_path = './models/SSNM-Coseg_best.pth'
 
-    val_datapath = ['../../input/ssnm-val/datasets/iCoseg8',
-                    '../../input/ssnm-val/datasets/MSRC7',
-                    '../../input/ssnm-val/datasets/Internet_Datasets300',
-                    '../../input/ssnm-val/datasets/PASCAL_VOC']
-
-    save_root_path = ['./cosegresults/iCoseg8',
-                      './cosegresults/Internet_Datasets300',
-                      './cosegresults/MSRC7',
-                      './cosegresults/PASCAL_VOC']
-
+    val_datapath = ['../../input/dataset/Dataset/Cats/',
+    save_root_path = ['./cosegresults/our_data/cat/']
     test(gpu_id, model_path, val_datapath, save_root_path, 5, 224, 'image')
