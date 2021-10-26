@@ -73,6 +73,6 @@ if __name__ == '__main__':
     device = torch.device(gpu_id)
     model_path = './models/SSNM-Coseg_best.pth'
 
-    val_datapath = ['../../input/dataset/Dataset/Cats/',
+    val_datapath = ['../../input/dataset/Dataset/Cats/']
     save_root_path = ['./cosegresults/our_data/cat/']
     test(gpu_id, model_path, val_datapath, save_root_path, 5, 224, 'image')
