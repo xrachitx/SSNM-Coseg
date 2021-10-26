@@ -39,7 +39,7 @@ def filt_small_instance(coco_item, pixthreshold=4000,imgNthreshold=5):
 def co_skel_data_producer(cat2imgpath,q,batch_size=5, group_size=5, max_images=50, img_size=224,gt=0, cls_size=13):
     img_transform = transforms.Compose([transforms.Resize((img_size, img_size)), transforms.ToTensor(),
                                         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
-    gt_transform = transforms.Compose([transforms.Resize((img_size, img_size)), transforms.ToTensor()])
+    gt_transform = transforms.Compose([transforms.ToPILImage(), transforms.Resize((img_size, img_size)), transforms.ToTensor()])
     img_transform_gray = transforms.Compose([transforms.Resize((img_size, img_size)), transforms.ToTensor(),transforms.Normalize(mean=[0.449], std=[0.226])])
 
     cat2index = {  
