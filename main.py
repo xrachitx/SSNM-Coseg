@@ -34,7 +34,7 @@ if __name__ == '__main__':
     lr = 1e-5
     lr_de = 20000
     epochs = 10000
-    batch_size = 2
+    batch_size = 5
     group_size = 5
     log_interval = 100
     val_interval = 1000
@@ -103,15 +103,15 @@ if __name__ == '__main__':
     # net.load_state_dict(torch.load('./models/SSNM-Coseg_last.pth', map_location='cuda:0'))
 
 
-    # p1 = threading.Thread(target=train_data_producer, args=(coco_item, train_datapath, npy, q, batch_size, group_size, img_size))
-    # p2 = threading.Thread(target=train_data_producer, args=(coco_item, train_datapath, npy, q, batch_size, group_size, img_size))
-    # p3 = threading.Thread(target=train_data_producer, args=(coco_item, train_datapath, npy, q, batch_size, group_size, img_size))
-    # p1.start()
-    # p2.start()
-    # p3.start()
-    # time.sleep(30)
+    p1 = threading.Thread(target=co_skel_data_producer, args=(cat2imgpath,q))
+    p2 = threading.Thread(target=co_skel_data_producer, args=(cat2imgpath,q))
+    p3 = threading.Thread(target=co_skel_data_producer, args=(cat2imgpath,q))
+    p1.start()
+    p2.start()
+    p3.start()
+    time.sleep(2)
 
-    q = co_skel_data_producer("./final.csv",batch_size,group_size)
+    # q = co_skel_data_producer("./final.csv",batch_size,group_size)
     train(net, device, q, log_txt_file, val_datapath, models_train_best, models_train_last, lr, lr_de, epochs, log_interval, val_interval)
 
 
