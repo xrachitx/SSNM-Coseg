@@ -60,10 +60,47 @@ if __name__ == '__main__':
     net.apply(weights_init)
     net.base.load_state_dict(torch.load(vgg16_path))
 
+    csv_file = "./final.csv"
+
+    cat2imgpath = {  
+       "Aeroplane":[],
+       "Bear":[],
+       "Bird":[],
+       "Bus":[],
+       "Cats":[],
+       "Cow":[],
+       "Cycle":[],
+       "Dog":[],
+       "Elephant":[],
+       "Giraffe":[],
+       "Horse":[],
+       "Sheep":[],
+       "Zebra":[]
+    }
+    csv_rows = []
+    with open(csv_file, 'r') as csvfile:
+        csvreader = csv.reader(csvfile)
+        for row in csvreader:
+            csv_rows.append(row)
+
+    random.shuffle(csv_rows)
+
+    for row in csv_rows:
+        if len(cat2imgpath[row[-1]]) < max_images:
+            if gt == 0:
+                cat2imgpath[row[-1]].append([row[0], row[3]])
+            elif gt == 1:#Complete Seg Mask
+                cat2imgpath[row[-1]].append([row[0], row[2]])
+            else:#Actual Seg Masks
+                cat2imgpath[row[-1]].append([row[0], row[1]])
+        else:
+            pass
+
+
     # continute load checkpoint
     # net.load_state_dict(torch.load('./models/SSNM-Coseg_last.pth', map_location='cuda:0'))
 
-    # q = queue.Queue(maxsize=40)
+    q = queue.Queue(maxsize=40)
 
     # p1 = threading.Thread(target=train_data_producer, args=(coco_item, train_datapath, npy, q, batch_size, group_size, img_size))
     # p2 = threading.Thread(target=train_data_producer, args=(coco_item, train_datapath, npy, q, batch_size, group_size, img_size))
