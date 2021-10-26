@@ -62,7 +62,8 @@ def co_skel_data_producer(cat2imgpath,q,batch_size=10, group_size=5, max_images=
 
 
     # imgs = []
-    while q.qsize !=20:
+    while q.qsize() !=20:
+        print(q.qsize())
         # if not cat2imgpath:
             # break
         # else:

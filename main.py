@@ -7,6 +7,7 @@ from model import build_model, weights_init
 from tools import custom_print
 from data_processed2 import co_skel_data_producer
 from train import train
+import csv,random
 import time
 torch.backends.cudnn.benchmark = True
 
@@ -96,11 +97,11 @@ if __name__ == '__main__':
         else:
             pass
 
+    q = queue.Queue(maxsize=40)
 
     # continute load checkpoint
     # net.load_state_dict(torch.load('./models/SSNM-Coseg_last.pth', map_location='cuda:0'))
 
-    q = queue.Queue(maxsize=40)
 
     # p1 = threading.Thread(target=train_data_producer, args=(coco_item, train_datapath, npy, q, batch_size, group_size, img_size))
     # p2 = threading.Thread(target=train_data_producer, args=(coco_item, train_datapath, npy, q, batch_size, group_size, img_size))
