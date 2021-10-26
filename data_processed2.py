@@ -7,6 +7,7 @@ import random
 import os
 import numpy as np
 from PIL import Image, ImageOps
+import cv2
 
 
 def filt_small_instance(coco_item, pixthreshold=4000,imgNthreshold=5):
@@ -79,10 +80,11 @@ def co_skel_data_producer(cat2imgpath,q,batch_size=5, group_size=5, max_images=5
                     img = img_transform_gray(img)
 
                 mask_path = cat2imgpath[cat][i][1]
-                mask = Image.open(mask_path)
-
-                mask = ImageOps.grayscale(mask)
-                # mask[mask > 0] = 255
+                # mask = Image.open(mask_path)
+                mask = cv2.imread(mask_path)
+                mask = mask*255
+                # mask = ImageOps.grayscale(mask)
+                mask[mask > 0] = 255
                 mask = gt_transform(mask)
                 mask[mask > 0.5] = 1
                 mask[mask <= 0.5] = 0
