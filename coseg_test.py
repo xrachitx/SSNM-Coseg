@@ -75,4 +75,4 @@ if __name__ == '__main__':
 
     val_datapath = ['../../input/dataset/Dataset/Cats/']
     save_root_path = ['./cosegresults/our_data/cat/']
-    test(gpu_id, model_path, val_datapath, save_root_path, 5, 224, 'image')
+    test(gpu_id, model_path, val_datapath, save_root_path, 5, 224, '')
